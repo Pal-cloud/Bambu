@@ -1,25 +1,45 @@
-class Cat:  # Ejemplo de getters y setters
-    def __init__(self, name, age):
-        self._name = name  # Atributo protegido
-        self._age = age    # Atributo protegido
-        self._energy = 100 # Atributo protegido
+class Cat:
+    """
+    Implementa control de acceso tradicional con getters y setters.
     
-    # GETTER - para obtener el valor de un atributo
+    Demuestra validación de datos y encapsulación usando métodos
+    explícitos para leer y modificar atributos protegidos.
+    """
+    
+    def __init__(self, name, age):
+        """
+        Inicializa gata con atributos protegidos.
+        
+        Args:
+            name (str): Nombre de la gata
+            age (int): Edad inicial en años
+        """
+        self._name = name
+        self._age = age
+        self._energy = 100
+
     def get_name(self):
-        """Getter: obtiene el nombre de la gata"""
+        """Obtiene nombre con formato decorativo."""
         return f"🐱 {self._name}"
     
     def get_age(self):
-        """Getter: obtiene la edad de la gata"""
+        """Obtiene edad actual."""
         return self._age
     
     def get_energy(self):
-        """Getter: obtiene la energía de la gata"""
+        """Obtiene nivel de energía actual."""
         return self._energy
-    
-    # SETTER - para modificar el valor de un atributo con validación
+
     def set_name(self, new_name):
-        """Setter: cambia el nombre con validación"""
+        """
+        Modifica nombre con validación de entrada.
+        
+        Args:
+            new_name (str): Nuevo nombre propuesto
+            
+        Returns:
+            str: Mensaje de éxito o error
+        """
         if isinstance(new_name, str) and len(new_name) > 0:
             self._name = new_name
             return f"✅ Nombre cambiado a: {new_name}"
@@ -27,7 +47,15 @@ class Cat:  # Ejemplo de getters y setters
             return "❌ Error: El nombre debe ser un texto válido"
     
     def set_age(self, new_age):
-        """Setter: cambia la edad con validación"""
+        """
+        Modifica edad con validación de rango.
+        
+        Args:
+            new_age (int): Nueva edad propuesta
+            
+        Returns:
+            str: Mensaje de éxito o error
+        """
         if isinstance(new_age, int) and 0 <= new_age <= 25:
             self._age = new_age
             return f"✅ Edad cambiada a: {new_age} años"
@@ -35,15 +63,28 @@ class Cat:  # Ejemplo de getters y setters
             return "❌ Error: La edad debe ser entre 0 y 25 años"
     
     def set_energy(self, new_energy):
-        """Setter: cambia la energía con validación"""
+        """
+        Modifica energía con validación de límites.
+        
+        Args:
+            new_energy (int): Nuevo nivel de energía
+            
+        Returns:
+            str: Mensaje de éxito o error
+        """
         if isinstance(new_energy, int) and 0 <= new_energy <= 100:
             self._energy = new_energy
             return f"✅ Energía cambiada a: {new_energy}"
         else:
             return "❌ Error: La energía debe ser entre 0 y 100"
-    
-    # Método para mostrar información completa
+
     def show_info(self):
+        """
+        Resumen completo del estado actual.
+        
+        Returns:
+            str: Información formateada de todos los atributos
+        """
         return f"🐱 {self._name} - Edad: {self._age} años - Energía: {self._energy}"
 
 

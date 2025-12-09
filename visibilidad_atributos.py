@@ -1,29 +1,56 @@
-class Animal:  # Ejemplo de atributos públicos, protegidos y privados
+class Animal:
+    """
+    Demuestra los tres niveles de visibilidad en Python.
+    
+    Convenciones de visibilidad:
+    - público: acceso libre (sin _)
+    - protegido: uso interno preferido (_)  
+    - privado: acceso restringido (__)
+    """
+    
     def __init__(self, name, age):
-        # ATRIBUTO PÚBLICO - accesible desde cualquier lugar
-        self.name = name  # Sin guiones bajos = público
+        """
+        Inicializa animal con diferentes niveles de visibilidad.
         
-        # ATRIBUTO PROTEGIDO - para uso interno y clases hijas
-        self._age = age  # Un guión bajo = protegido
-        
-        # ATRIBUTO PRIVADO - solo para uso interno de esta clase
-        self.__secret_id = 12345  # Dos guiones bajos = privado
-    
-    # MÉTODO PÚBLICO - accesible desde cualquier lugar
-    def get_info(self):
-        return f"🐾 {self.name} tiene {self._age} años"
-    
-    # MÉTODO PROTEGIDO - para uso interno y clases hijas
+        Args:
+            name (str): Nombre público del animal
+            age (int): Edad protegida del animal
+        """
+        self.name = name                    # Público - acceso libre
+        self.energy = 100                   # Público - acceso libre
+        self._age = age                     # Protegido - uso interno preferido
+        self.__secret_id = 12345            # Privado - acceso muy restringido
+
     def _calculate_energy(self):
+        """
+        Método protegido para cálculos internos.
+        
+        Returns:
+            int: Energía calculada basada en la edad
+        """
         return self._age * 10
-    
-    # MÉTODO PRIVADO - solo para uso interno de esta clase
+
     def __generate_secret(self):
+        """Método privado solo para uso interno de esta clase."""
         return f"Secreto: {self.__secret_id}"
-    
-    # MÉTODO PÚBLICO que usa el método privado
+
     def show_secret(self):
+        """
+        Única forma pública de acceder a datos privados.
+        
+        Returns:
+            str: ID secreto del animal
+        """
         return self.__generate_secret()
+
+    def get_info(self):
+        """
+        Información completa usando todos los niveles de acceso.
+        
+        Returns:
+            str: Información formateada del animal
+        """
+        return f"🐾 {self.name} tiene {self._age} años"
 
 
 class Cat(Animal):  # Clase hija para probar herencia

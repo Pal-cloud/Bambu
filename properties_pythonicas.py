@@ -1,53 +1,91 @@
-class Cat:  # Ejemplo pytónico de getters y setters con @property
-    def __init__(self, name, age):
-        self._name = name  # Atributo protegido
-        self._age = age    # Atributo protegido
-        self._energy = 100 # Atributo protegido
+class Cat:
+    """
+    Implementa control de acceso pytónico usando decorador @property.
     
-    # GETTER PYTÓNICO - usando @property
+    Demuestra la forma elegante y natural de Python para getters/setters
+    que permite sintaxis de atributo con validación incorporada.
+    """
+    
+    def __init__(self, name, age):
+        """
+        Inicializa gata usando properties para validación automática.
+        
+        Args:
+            name (str): Nombre de la gata
+            age (int): Edad inicial en años
+        """
+        self._name = name
+        self.age = age  # Usa el setter automáticamente
+        self._energy = 100
+
     @property
     def name(self):
-        """Getter pytónico: obtiene el nombre como si fuera un atributo"""
+        """Property para obtener nombre con formato decorativo."""
         return f"🐱 {self._name}"
     
-    @property
+    @name.setter
+    def name(self, value):
+        """
+        Valida y asigna nuevo nombre.
+        
+        Args:
+            value (str): Nuevo nombre propuesto
+            
+        Raises:
+            ValueError: Si el nombre no es válido
+        """
+        if not isinstance(value, str) or len(value) == 0:
+            raise ValueError("El nombre debe ser un texto válido")
+        self._name = value
+
+    @property  
     def age(self):
-        """Getter pytónico: obtiene la edad"""
+        """Property para obtener edad actual."""
         return self._age
     
+    @age.setter
+    def age(self, value):
+        """
+        Valida y asigna nueva edad.
+        
+        Args:
+            value (int): Nueva edad propuesta
+            
+        Raises:
+            ValueError: Si la edad está fuera del rango válido
+        """
+        if not isinstance(value, int) or not (0 <= value <= 25):
+            raise ValueError("La edad debe ser un entero entre 0 y 25")
+        self._age = value
+
     @property
     def energy(self):
-        """Getter pytónico: obtiene la energía"""
+        """Property para obtener nivel de energía actual."""
         return self._energy
     
-    # SETTER PYTÓNICO - usando @nombre.setter
-    @name.setter
-    def name(self, new_name):
-        """Setter pytónico: cambia el nombre con validación"""
-        if isinstance(new_name, str) and len(new_name) > 0:
-            self._name = new_name
-        else:
-            raise ValueError("❌ El nombre debe ser un texto válido")
-    
-    @age.setter
-    def age(self, new_age):
-        """Setter pytónico: cambia la edad con validación"""
-        if isinstance(new_age, int) and 0 <= new_age <= 25:
-            self._age = new_age
-        else:
-            raise ValueError("❌ La edad debe ser entre 0 y 25 años")
-    
     @energy.setter
-    def energy(self, new_energy):
-        """Setter pytónico: cambia la energía con validación"""
-        if isinstance(new_energy, int) and 0 <= new_energy <= 100:
-            self._energy = new_energy
-        else:
-            raise ValueError("❌ La energía debe ser entre 0 y 100")
-    
-    # Método para mostrar información completa
+    def energy(self, value):
+        """
+        Valida y asigna nuevo nivel de energía.
+        
+        Args:
+            value (int): Nuevo nivel de energía
+            
+        Raises:
+            ValueError: Si la energía está fuera del rango válido
+        """
+        if not isinstance(value, int) or not (0 <= value <= 100):
+            raise ValueError("La energía debe ser un entero entre 0 y 100")
+        self._energy = value
+
     def show_info(self):
-        return f"🐱 {self._name} - Edad: {self._age} años - Energía: {self._energy}"
+        """
+        Resumen completo usando properties.
+        
+        Returns:
+            str: Información formateada de todos los atributos
+        """
+        return f"{self.name} - Edad: {self.age} años - Energía: {self.energy}"
 
 
 # Ejemplo pytónico de properties

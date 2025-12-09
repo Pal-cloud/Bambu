@@ -1,9 +1,22 @@
-class Animal:  # Clase simple para demostrar atributos de clase
-    total_animals = 0  # 🏢 ATRIBUTO DE CLASE - compartido por todos los animales
+class Animal:
+    """
+    Demuestra la diferencia entre atributos de clase e instancia.
+    
+    Atributos de clase:
+        total_animals (int): Contador global compartido por todas las instancias
+    """
+    
+    total_animals = 0  # Atributo de clase - compartido por todos los animales
     
     def __init__(self, name):
-        self.name = name           # 👤 Atributo de instancia - cada animal tiene su propio nombre
-        Animal.total_animals += 1  # Cada vez que se crea un animal, suma 1 al total
+        """
+        Crea un animal e incrementa automáticamente el contador global.
+        
+        Args:
+            name (str): Nombre único del animal
+        """
+        self.name = name  # Atributo de instancia - único para cada objeto
+        Animal.total_animals += 1  # Modifica el atributo de clase
 
 
 # Ejemplo súper simple de atributo de clase
